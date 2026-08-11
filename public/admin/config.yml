@@ -1,10 +1,10 @@
 # === Configuración del panel (Sveltia CMS, compatible con Decap) ===
 backend:
   name: github
-  repo: USUARIO-GITHUB/manueldhers-site   # <-- cambiar por tu usuario/repositorio
+  repo: jackelinetm/manueldhers-site   # <-- cambiar por tu usuario/repositorio
   branch: main
   # URL del worker de autenticación (sveltia-cms-auth en Cloudflare). Ver README, paso 4.
-  base_url: https://TU-WORKER.workers.dev
+  base_url: https://sveltia-cms-auth.jtorresmagne-b17.workers.dev
 
 # Guarda cambios como Pull Request en vez de escribir directo (opcional, más seguro):
 # publish_mode: editorial_workflow
