@@ -1,0 +1,67 @@
+---
+import { SITE } from '../consts';
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  article?: { date?: Date; modified?: Date };
+}
+const {
+  title,
+  description = SITE.description,
+  image = '/og-default.jpg',
+  type = 'website',
+  article,
+} = Astro.props;
+
+const pageTitle = title ? `${title} — ${SITE.title}` : SITE.title;
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const ogImage = new URL(image, SITE.url).href;
+
+// JSON-LD: Persona (identidad académica) + Artículo si aplica.
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.author,
+  jobTitle: 'Doctor en Antropología y Comunicación',
+  affiliation: { '@type': 'Organization', name: 'Universitat Rovira i Virgili' },
+  url: SITE.url,
+  sameAs: SITE.sameAs,
+};
+const articleLd = article && {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  author: { '@type': 'Person', name: SITE.author },
+  datePublished: article.date?.toISOString(),
+  dateModified: (article.modified ?? article.date)?.toISOString(),
+  mainEntityOfPage: canonical,
+};
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content={SITE.title} />
+<meta property="og:locale" content={SITE.locale} />
+<meta property="og:image" content={ogImage} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@manuchente" />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<link rel="sitemap" href="/sitemap-index.xml" />
+<script type="application/ld+json" set:html={JSON.stringify(personLd)} />
+{articleLd && <script type="application/ld+json" set:html={JSON.stringify(articleLd)} />}

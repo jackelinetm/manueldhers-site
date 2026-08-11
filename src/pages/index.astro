@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection, getEntry, render } from 'astro:content';
+
+// Contenido editable desde el panel (src/content/pages/home.md).
+const homeEntry = await getEntry('pages', 'home');
+const home = homeEntry?.data;
+const rendered = homeEntry ? await render(homeEntry) : null;
+const IntroContent = rendered?.Content;
+
+// Top 3 publicaciones más recientes (mezcla natural de Prensa,
+// Artículos y Trabajos académicos, ordenadas por año descendente).
+const recientes = (await getCollection('publicaciones'))
+  .sort((a, b) => (b.data.order ?? b.data.year) - (a.data.order ?? a.data.year))
+  .slice(0, 3);
+
+// Parte el eyebrow por "◆" para dar acento terracota al símbolo.
+const eyebrowParts = (home?.eyebrow ?? '').split('◆');
+---
+<Base>
+  <!-- Hero: nombre + rol + intro -->
+  <section class="hero">
+    <div class="hero-left">
+      {home?.eyebrow && (
+        <div class="hero-eyebrow">
+          {eyebrowParts.map((part, i) => (
+            <>
+              {i > 0 && <span class="accent">◆</span>}
+              {part}
+            </>
+          ))}
+        </div>
+      )}
+      <h1 class="hero-title">
+        <span class="l">Manuel D'Hers</span>
+        <span class="l">Del Pozo</span>
+      </h1>
+    </div>
+    <div class="hero-right">
+      {home?.role && <div class="hero-role">{home.role}</div>}
+      {IntroContent && (
+        <div class="hero-intro">
+          <IntroContent />
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Escritos recientes: las 3 publicaciones más recientes -->
+  {recientes.length > 0 && (
+    <section class="section">
+      <div class="section-head">
+        <div class="section-lbl">Escritos recientes</div>
+        <a class="section-more" href="/publicaciones/">Ver todo →</a>
+      </div>
+      <div class="recent-grid">
+        {recientes.map((r) => (
+          <article class="recent-e">
+            <a
+              href={r.data.url || '/publicaciones/'}
+              target={r.data.url ? '_blank' : undefined}
+              rel={r.data.url ? 'noopener' : undefined}
+            >
+              <div class="m">
+                <span class="accent">◆ {r.data.tipo}</span> · {r.data.year}
+              </div>
+              <h3>{r.data.title}</h3>
+              {r.data.venue && <div class="out">{r.data.venue}</div>}
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+</Base>

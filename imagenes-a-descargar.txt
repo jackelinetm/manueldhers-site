@@ -1,0 +1,31 @@
+# ARCHIVOS PARA public/uploads/  — descárgalos con el WordPress viejo aún en línea.
+# (Los .pdf pueden estar en la raíz del dominio; si dan 404, míralos en /wp-content/uploads/.)
+# destino  <=  URL de origen
+
+public/uploads/0acbd683-e953-4b0a-b403-ce8c3875354d.jpg  <=  https://manueldhers.com/wp-content/uploads/2023/03/0acbd683-e953-4b0a-b403-ce8c3875354d.jpg
+public/uploads/5cdc3f7f-2f17-4fc0-8f8a-fe4e1c17cf51.jpg  <=  https://manueldhers.com/wp-content/uploads/2023/04/5cdc3f7f-2f17-4fc0-8f8a-fe4e1c17cf51.jpg
+public/uploads/988618_632763833403309_1603284715_n.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/05/988618_632763833403309_1603284715_n.jpeg
+public/uploads/Arxiu_etnografiaCatalunya.pdf  <=  https://manueldhers.com/Arxiu_etnografiaCatalunya.pdf
+public/uploads/IMG_20230415_134725-scaled.jpg  <=  https://manueldhers.com/wp-content/uploads/2025/06/IMG_20230415_134725-scaled.jpg
+public/uploads/IMG_20230422_104913-scaled.jpg  <=  https://manueldhers.com/wp-content/uploads/2025/06/IMG_20230422_104913-scaled.jpg
+public/uploads/IMG_5150.heic  <=  https://manueldhers.com/wp-content/uploads/2025/06/IMG_5150.heic
+public/uploads/T.F.M_APROXIMACIONES_A_LA_MIGRACION_INMOVIL_EN.pdf  <=  https://manueldhers.com/T.F.M_APROXIMACIONES_A_LA_MIGRACION_INMOVIL_EN.pdf
+public/uploads/Venezuela-se-arregló.jpeg  <=  https://manueldhers.com/wp-content/uploads/2022/05/Venezuela-se-arregló.jpeg
+public/uploads/WhatsApp-Image-2023-03-17-at-6.12.12-PM.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/03/WhatsApp-Image-2023-03-17-at-6.12.12-PM.jpeg
+public/uploads/WhatsApp-Image-2023-04-01-at-6.14.25-PM-2.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/04/WhatsApp-Image-2023-04-01-at-6.14.25-PM-2.jpeg
+public/uploads/WhatsApp-Image-2023-04-01-at-6.14.25-PM.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/04/WhatsApp-Image-2023-04-01-at-6.14.25-PM.jpeg
+public/uploads/WhatsApp-Image-2023-04-18-at-1.29.13-PM.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/04/WhatsApp-Image-2023-04-18-at-1.29.13-PM.jpeg
+public/uploads/WhatsApp-Image-2023-04-18-at-1.29.14-PM-1.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/04/WhatsApp-Image-2023-04-18-at-1.29.14-PM-1.jpeg
+public/uploads/WhatsApp-Image-2023-04-18-at-1.33.28-PM.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/04/WhatsApp-Image-2023-04-18-at-1.33.28-PM.jpeg
+public/uploads/WhatsApp-Image-2023-04-18-at-2.32.05-PM.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/04/WhatsApp-Image-2023-04-18-at-2.32.05-PM.jpeg
+public/uploads/WhatsApp-Image-2023-05-22-at-8.43.18-AM.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/05/WhatsApp-Image-2023-05-22-at-8.43.18-AM.jpeg
+public/uploads/WhatsApp-Image-2023-05-22-at-8.43.20-AM.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/05/WhatsApp-Image-2023-05-22-at-8.43.20-AM.jpeg
+public/uploads/WhatsApp-Image-2023-05-22-at-8.43.41-AM.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/05/WhatsApp-Image-2023-05-22-at-8.43.41-AM.jpeg
+public/uploads/WhatsApp-Image-2023-05-22-at-8.43.43-AM.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/05/WhatsApp-Image-2023-05-22-at-8.43.43-AM.jpeg
+public/uploads/WhatsApp-Image-2023-06-09-at-15.07.47-e1686316306524.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-06-09-at-15.07.47-e1686316306524.jpeg
+public/uploads/WhatsApp-Image-2023-06-09-at-3.02.19-PM-1-e1686316013696.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-06-09-at-3.02.19-PM-1-e1686316013696.jpeg
+public/uploads/WhatsApp-Image-2023-06-09-at-3.02.19-PM-4-e1686316187652.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-06-09-at-3.02.19-PM-4-e1686316187652.jpeg
+public/uploads/WhatsApp-Image-2023-06-09-at-3.02.19-PM-5.jpeg  <=  https://manueldhers.com/wp-content/uploads/2023/06/WhatsApp-Image-2023-06-09-at-3.02.19-PM-5.jpeg
+public/uploads/WhatsApp-Video-2023-05-26-at-12.36.04-PM.mp4  <=  https://manueldhers.com/wp-content/uploads/2025/06/WhatsApp-Video-2023-05-26-at-12.36.04-PM.mp4
+public/uploads/dolares.jpeg  <=  https://manueldhers.com/wp-content/uploads/2022/05/dolares.jpeg
+public/uploads/starbucks.jpeg  <=  https://manueldhers.com/wp-content/uploads/2022/05/starbucks.jpeg

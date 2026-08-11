@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://manueldhers.com/sitemap-index.xml

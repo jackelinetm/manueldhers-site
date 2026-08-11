@@ -1,0 +1,34 @@
+---
+import { SITE } from '../consts';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="grid">
+    <div>
+      <h2>
+        <span class="l">Manuel D'Hers</span>
+        <span class="l">Del Pozo</span>
+      </h2>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <a class="ln" href="https://x.com/manuchente" target="_blank" rel="noopener">
+        X · @manuchente
+      </a>
+      <a class="ln" href="https://www.linkedin.com/in/manuel-d-hers-del-pozo-6b8b9bb0/" target="_blank" rel="noopener">
+        LinkedIn
+      </a>
+    </div>
+    <div>
+      <h4>Navegar</h4>
+      <a class="ln" href="/">Inicio</a>
+      {SITE.nav.map((i) => (
+        <a class="ln" href={i.href}>{i.label}</a>
+      ))}
+    </div>
+    <div class="colophon">
+      <span>© {year} Manuel D'Hers Del Pozo · Todos los derechos reservados</span>
+      <span>Tarragona</span>
+    </div>
+  </div>
+</footer>

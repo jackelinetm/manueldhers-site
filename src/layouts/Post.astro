@@ -1,0 +1,27 @@
+---
+import Base from './Base.astro';
+interface Props {
+  title: string;
+  description?: string;
+  date: Date;
+  category?: string;
+}
+const { title, description, date, category } = Astro.props;
+const fecha = date.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+const iso = date.toISOString();
+---
+<Base title={title} description={description} type="article" article={{ date }}>
+  <article class="article">
+    <a href="/blog/" class="back">← Volver al blog</a>
+    <div class="meta-line">
+      <time datetime={iso}>{fecha}</time>
+      {category && <> · <span class="accent">{category}</span></>}
+    </div>
+    <h1>{title}</h1>
+    {description && <p class="lede">{description}</p>}
+    <div class="byline"><strong>Manuel D'Hers Del Pozo</strong></div>
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</Base>

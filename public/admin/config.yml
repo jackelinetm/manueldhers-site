@@ -1,0 +1,81 @@
+# === Configuración del panel (Sveltia CMS, compatible con Decap) ===
+backend:
+  name: github
+  repo: jackelinetm/manueldhers-site   # <-- cambiar por tu usuario/repositorio
+  branch: main
+  # URL del worker de autenticación (sveltia-cms-auth en Cloudflare). Ver README, paso 4.
+  base_url: https://sveltia-cms-auth.jtorresmagne-b17.workers.dev
+
+# Guarda cambios como Pull Request en vez de escribir directo (opcional, más seguro):
+# publish_mode: editorial_workflow
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+locale: es
+
+collections:
+  # ---------------- BLOG ----------------
+  - name: blog
+    label: "Blog"
+    label_singular: "Entrada"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{fields.slug}}"          # el nombre de archivo sigue al slug (la URL)
+    identifier_field: title
+    fields:
+      - { name: title, label: "Título", widget: string }
+      - { name: date, label: "Fecha", widget: datetime, format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+      - { name: slug, label: "Slug (URL) — no cambiar en entradas ya publicadas", widget: string, hint: "La entrada vivirá en manueldhers.com/EL-SLUG/" }
+      - name: category
+        label: "Categoría"
+        widget: select
+        required: false
+        options: ["Diario de Campo", "Migración Inmóvil", "Cuidados", "Crisis venezolana", "Venezuela"]
+      - { name: description, label: "Descripción (SEO / resumen)", widget: text, required: false }
+      - { name: cover, label: "Imagen destacada", widget: image, required: false }
+      - { name: draft, label: "Borrador", widget: boolean, default: false }
+      - { name: body, label: "Contenido", widget: markdown }
+
+  # ---------------- PUBLICACIONES ----------------
+  - name: publicaciones
+    label: "Publicaciones"
+    label_singular: "Publicación"
+    folder: "src/content/publicaciones"
+    create: true
+    slug: "{{year}}-{{slug}}"
+    identifier_field: title
+    fields:
+      - { name: title, label: "Título", widget: string }
+      - { name: authors, label: "Autores", widget: string, default: "D'Hers, M." }
+      - { name: year, label: "Año", widget: number, value_type: int }
+      - name: tipo
+        label: "Tipo"
+        widget: select
+        options: ["Prensa", "Artículos", "Trabajos académicos"]
+        default: "Artículos"
+      - { name: venue, label: "Revista / Editorial / Medio", widget: string, required: false }
+      - { name: url, label: "Enlace al texto", widget: string, required: false }
+      - { name: doi, label: "DOI", widget: string, required: false }
+      - { name: citation, label: "Cómo citar", widget: text, required: false }
+      - name: downloads
+        label: "Descargas"
+        widget: list
+        required: false
+        fields:
+          - { name: label, label: "Etiqueta (p. ej. Español / PDF)", widget: string }
+          - { name: url, label: "Enlace", widget: string }
+      - { name: order, label: "Orden (opcional)", widget: number, required: false, value_type: int }
+      - { name: body, label: "Notas (opcional)", widget: markdown, required: false }
+
+  # ---------------- PÁGINAS FIJAS ----------------
+  - name: pages
+    label: "Páginas"
+    files:
+      - name: bio
+        label: "Bio"
+        file: "src/content/pages/bio.md"
+        fields:
+          - { name: title, label: "Título", widget: string }
+          - { name: description, label: "Descripción (SEO)", widget: text, required: false }
+          - { name: body, label: "Contenido", widget: markdown }

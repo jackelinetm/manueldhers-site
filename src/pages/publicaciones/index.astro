@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const items = (await getCollection('publicaciones')).sort(
+  (a, b) => (b.data.order ?? b.data.year) - (a.data.order ?? a.data.year)
+);
+
+// Orden natural de los tipos para los filtros y para la agrupación.
+const orden = ['Prensa', 'Artículos', 'Trabajos académicos'];
+const tiposPresentes: string[] = Array.from(new Set(items.map((i) => i.data.tipo as string)));
+const tipos = orden.filter((t) => tiposPresentes.includes(t));
+---
+<Base
+  title="Publicaciones"
+  description="Publicaciones de Manuel D'Hers Del Pozo: prensa, artículos y trabajos académicos."
+>
+  <section class="page-head">
+    <div class="eyebrow">Índice completo <span class="accent">◆</span> Escritos</div>
+    <h1>Publicaciones</h1>
+    <div class="sub">
+      <span class="accent">{items.length} entrada{items.length !== 1 ? 's' : ''}</span> · Prensa · Artículos · Trabajos académicos
+    </div>
+  </section>
+
+  {tipos.length > 1 && (
+    <div class="filters" role="group" aria-label="Filtrar por tipo">
+      <button class="filter-btn" data-filter="all" aria-pressed="true">Todos</button>
+      {tipos.map((t) => (
+        <button class="filter-btn" data-filter={t} aria-pressed="false">{t}</button>
+      ))}
+    </div>
+  )}
+
+  <ul class="pub-list">
+    {items.map((p) => (
+      <li class="pub-item" data-tipo={p.data.tipo}>
+        <div class="meta">
+          <span class="accent">■ {p.data.tipo}</span>
+          <span class="yr">{p.data.year}</span>
+        </div>
+        <div class="pub-body">
+          <div class="titulo">{p.data.title}</div>
+          {p.data.citation && <p class="cita">{p.data.citation}</p>}
+          <p class="linea">
+            {p.data.doi && (
+              <><span>DOI: </span><a href={`https://doi.org/${p.data.doi}`} target="_blank" rel="noopener">{p.data.doi}</a></>
+            )}
+            {p.data.doi && (p.data.url || p.data.downloads.length > 0) && <span class="sep">·</span>}
+            {p.data.url && (
+              <><a href={p.data.url} target="_blank" rel="noopener">Leer →</a></>
+            )}
+            {p.data.downloads.map((d) => (
+              <><span class="sep">·</span><a href={d.url} target="_blank" rel="noopener">{d.label} →</a></>
+            ))}
+          </p>
+        </div>
+        <div class="outlet-side">{p.data.venue}</div>
+      </li>
+    ))}
+  </ul>
+</Base>

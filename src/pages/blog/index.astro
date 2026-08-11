@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<Base
+  title="Blog"
+  description="Diarios de campo, notas y ensayos breves de Manuel D'Hers Del Pozo."
+>
+  <section class="page-head">
+    <div class="eyebrow">Notas · Diarios <span class="accent">◆</span> Lecturas</div>
+    <h1>Blog</h1>
+    <div class="sub">
+      <span class="accent">{posts.length} entrada{posts.length !== 1 ? 's' : ''}</span> · Diarios de campo · Notas · Ensayos
+    </div>
+  </section>
+
+  <ul class="pub-list">
+    {posts.map((p) => {
+      const fecha = p.data.date.toLocaleDateString('es-ES', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      });
+      const anio = p.data.date.getFullYear();
+      return (
+        <li class="pub-item">
+          <div class="meta">
+            {p.data.category ? <span class="accent">◆ {p.data.category}</span> : <span class="accent">◆ Blog</span>}
+            <span class="yr">{anio}</span>
+          </div>
+          <div class="pub-body">
+            <a href={`/${p.data.slug}/`} class="titulo" style="display:block; color:inherit;">
+              {p.data.title}
+            </a>
+            {p.data.description && <p class="cita" style="font-style:normal;">{p.data.description}</p>}
+            <p class="linea">
+              <time datetime={p.data.date.toISOString()}>{fecha}</time>
+            </p>
+          </div>
+          <div class="outlet-side">
+            <a href={`/${p.data.slug}/`} style="color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase;">
+              Leer →
+            </a>
+          </div>
+        </li>
+      );
+    })}
+  </ul>
+</Base>

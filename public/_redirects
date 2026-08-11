@@ -1,0 +1,9 @@
+# Congresos se elimina del sitio nuevo -> mandamos a la home (evita 404 y conserva SEO)
+/congresos       /            301
+/congresos/      /            301
+
+# El blog nuevo muestra todo en una sola pagina; la vieja paginacion se redirige
+/blog/page/2     /blog/       301
+/blog/page/2/    /blog/       301
+
+# (Añade aquí cualquier URL vieja que cambie de ruta:  /ruta-vieja/   /ruta-nueva/   301)

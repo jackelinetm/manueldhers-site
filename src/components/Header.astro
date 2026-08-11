@@ -1,0 +1,22 @@
+---
+import { SITE } from '../consts';
+const path = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href === '/' && path === '/') return true;
+  if (href !== '/' && path.startsWith(href)) return true;
+  return false;
+};
+---
+<header class="site-header">
+  <a href="/" class="brand" aria-label={`Inicio · ${SITE.title}`}>
+    <strong>M. D'Hers</strong> <span class="accent">Del Pozo</span>
+  </a>
+  <nav aria-label="Principal">
+    {SITE.nav.map((i) => (
+      <a href={i.href} aria-current={isActive(i.href) ? 'page' : undefined}>{i.label}</a>
+    ))}
+  </nav>
+  <button class="menu-toggle" data-open-menu aria-label="Abrir menú" aria-controls="m-menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>

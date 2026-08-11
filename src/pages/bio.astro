@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('pages', 'bio');
+const { Content } = entry ? await render(entry) : { Content: null };
+const formacion = entry?.data.formacion ?? [];
+const ubicacion = entry?.data.ubicacion ?? [];
+const perfiles = entry?.data.perfiles ?? [];
+const topics = entry?.data.topics ?? [];
+---
+<Base
+  title="Bio"
+  description="Trayectoria y líneas de investigación de Manuel D'Hers Del Pozo."
+>
+  <section class="page-head">
+    <div class="eyebrow">Sobre <span class="accent">Manuel</span> · 2026</div>
+    <h1>
+      <span class="l">Manuel D'Hers</span>
+      <span class="l">Del Pozo</span>
+    </h1>
+    <div class="role">◆ Doctor en Antropología · Universitat Rovira i Virgili</div>
+  </section>
+
+  <div class="bio-body">
+    <div class="bio-prose">
+      {Content ? <Content /> : <p>Contenido de la bio (editable desde el panel).</p>}
+    </div>
+
+    <aside class="bio-side">
+      {formacion.length > 0 && (
+        <>
+          <h4>Formación</h4>
+          <dl>
+            {formacion.map((f) => (
+              <>
+                <dt>{f.degree}</dt><dd>{f.detail}</dd>
+              </>
+            ))}
+          </dl>
+        </>
+      )}
+
+      {ubicacion.length > 0 && (
+        <>
+          <h4>Ubicación</h4>
+          <dl>
+            {ubicacion.map((u) => (
+              <>
+                <dt>{u.label}</dt><dd>{u.value}</dd>
+              </>
+            ))}
+          </dl>
+        </>
+      )}
+
+      {perfiles.length > 0 && (
+        <>
+          <h4>Perfiles</h4>
+          <dl>
+            {perfiles.map((p) => (
+              <>
+                <dt>{p.label}</dt>
+                <dd>
+                  <a href={p.url} target="_blank" rel="noopener">{p.display}</a>
+                </dd>
+              </>
+            ))}
+          </dl>
+        </>
+      )}
+
+      {topics.length > 0 && (
+        <>
+          <h4>Temas</h4>
+          <dl>
+            {topics.map((t) => (
+              <>
+                <dt>◆</dt><dd>{t}</dd>
+              </>
+            ))}
+          </dl>
+        </>
+      )}
+    </aside>
+  </div>
+</Base>
