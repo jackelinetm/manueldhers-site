@@ -1,10 +1,10 @@
 # === Configuración del panel (Sveltia CMS, compatible con Decap) ===
 backend:
   name: github
-  repo: jackelinetm/manueldhers-site   # <-- cambiar por tu usuario/repositorio
+  repo: USUARIO-GITHUB/manueldhers-site   # <-- cambiar por tu usuario/repositorio
   branch: main
   # URL del worker de autenticación (sveltia-cms-auth en Cloudflare). Ver README, paso 4.
-  base_url: https://sveltia-cms-auth.jtorresmagne-b17.workers.dev
+  base_url: https://TU-WORKER.workers.dev
 
 # Guarda cambios como Pull Request en vez de escribir directo (opcional, más seguro):
 # publish_mode: editorial_workflow
@@ -31,7 +31,7 @@ collections:
         label: "Categoría"
         widget: select
         required: false
-        options: ["Diario de Campo", "Migración Inmóvil", "Cuidados", "Crisis venezolana", "Venezuela"]
+        options: ["Diario de Campo", "Migración Inmóvil", "Cuidados", "Crisis venezolana", "Venezuela", "Opinión"]
       - { name: description, label: "Descripción (SEO / resumen)", widget: text, required: false }
       - { name: cover, label: "Imagen destacada", widget: image, required: false }
       - { name: draft, label: "Borrador", widget: boolean, default: false }
@@ -72,10 +72,49 @@ collections:
   - name: pages
     label: "Páginas"
     files:
+      - name: home
+        label: "Home"
+        file: "src/content/pages/home.md"
+        fields:
+          - { name: title, label: "Título (interno)", widget: hidden, default: "Home" }
+          - { name: eyebrow, label: "Palabras clave (línea gris arriba del nombre)", widget: string, required: false, hint: "El símbolo ◆ (si lo incluyes) se muestra en terracota. Ej: 'Antropología · Cuidado · Venezuela ◆ 2026'" }
+          - { name: role, label: "Rol / afiliación (línea terracota)", widget: string, required: false, hint: "Ej: 'Doctor en Antropología · URV'" }
+          - { name: body, label: "Descripción de la investigación", widget: markdown, hint: "Aparece en la home a la derecha del nombre. Usa **negrita** para acentuar palabras en terracota." }
       - name: bio
         label: "Bio"
         file: "src/content/pages/bio.md"
         fields:
           - { name: title, label: "Título", widget: string }
           - { name: description, label: "Descripción (SEO)", widget: text, required: false }
+          - name: formacion
+            label: "Formación (sidebar)"
+            widget: list
+            required: false
+            hint: "Cada entrada: título abreviado + detalle. Ej: 'Ph.D.' — 'URV · 2025'"
+            fields:
+              - { name: degree, label: "Título (abreviado)", widget: string }
+              - { name: detail, label: "Detalle", widget: string }
+          - name: ubicacion
+            label: "Ubicación (sidebar)"
+            widget: list
+            required: false
+            hint: "Cada entrada: etiqueta + valor. Ej: 'Reside' — 'Tarragona, España'"
+            fields:
+              - { name: label, label: "Etiqueta", widget: string }
+              - { name: value, label: "Valor", widget: string }
+          - name: perfiles
+            label: "Perfiles / Enlaces (sidebar)"
+            widget: list
+            required: false
+            hint: "Enlaces académicos y sociales. Ej: 'ORCID' → 'https://orcid.org/…' — texto visible: '0000-0002-…'"
+            fields:
+              - { name: label, label: "Etiqueta corta (ej. ORCID)", widget: string }
+              - { name: url, label: "Enlace completo (https://…)", widget: string }
+              - { name: display, label: "Texto visible", widget: string }
+          - name: topics
+            label: "Temas (sidebar)"
+            widget: list
+            required: false
+            hint: "Aparecen con un ◆ delante."
+            field: { name: tema, label: "Tema", widget: string }
           - { name: body, label: "Contenido", widget: markdown }
