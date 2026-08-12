@@ -5,7 +5,7 @@ formacion:
   - degree: Ph.D.
     detail: URV · 2025
   - degree: Máster
-    detail: URV · Antropología Urbanaa
+    detail: URV · Antropología Urbana
   - degree: Lic.
     detail: UCV · Caracas
 ubicacion:
