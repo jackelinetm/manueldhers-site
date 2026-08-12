@@ -1,13 +1,24 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-// Nota sobre .nullish() vs .optional():
-//   .optional()  -> acepta undefined (o campo ausente en el YAML)
-//   .nullish()   -> acepta undefined Y null
-// Sveltia CMS a veces escribe `campo: null` en el YAML cuando dejas un
-// campo opcional vacío, y eso rompe .optional(). Por eso usamos .nullish()
-// en todos los campos opcionales — así el build nunca se rompe por dejar
-// algo en blanco desde el panel.
+// Nota sobre estas decisiones de schema:
+//
+// 1) .nullish() en vez de .optional()
+//    .optional()  -> acepta undefined (o campo ausente)
+//    .nullish()   -> acepta undefined Y null
+//    Sveltia escribe `campo: null` en el YAML cuando un campo opcional
+//    queda vacío. Con .nullish() no rompe el build por eso.
+//
+// 2) flexUrl en vez de z.string().url()
+//    z.string().url() es muy estricto: exige http:// o https:// completos,
+//    y rechaza rutas relativas ("/uploads/foo.pdf") o cadenas vacías.
+//    Manuel a veces pega URLs sin protocolo o rutas internas, y eso rompía
+//    el build. Con flexUrl aceptamos cualquier string y convertimos "" a null.
+
+const flexUrl = z.preprocess(
+  (v) => (typeof v === 'string' && v.trim() === '' ? null : v),
+  z.string().nullish()
+);
 
 // BLOG: las entradas viven en la RAIZ del dominio con su slug legacy.
 // El campo `slug` es la URL exacta y NO debe cambiarse en entradas ya publicadas.
@@ -37,11 +48,11 @@ const publicaciones = defineCollection({
     year: z.number(),
     tipo: z.enum(['Prensa', 'Artículos', 'Trabajos académicos']).default('Artículos'),
     venue: z.string().nullish(),           // revista / editorial / medio
-    url: z.string().url().nullish(),       // enlace al texto
+    url: flexUrl,                          // enlace al texto
     doi: z.string().nullish(),
     citation: z.string().nullish(),        // "Cómo citar"
     downloads: z
-      .array(z.object({ label: z.string(), url: z.string().url() }))
+      .array(z.object({ label: z.string(), url: z.string() }))
       .default([]),
     order: z.number().nullish(),
   }),
@@ -70,7 +81,7 @@ const pages = defineCollection({
     })).nullish(),
     perfiles: z.array(z.object({
       label: z.string(),
-      url: z.string().url(),
+      url: z.string(),
       display: z.string(),
     })).nullish(),
     topics: z.array(z.string()).nullish(),
@@ -78,3 +89,4 @@ const pages = defineCollection({
 });
 
 export const collections = { blog, publicaciones, pages };
+
