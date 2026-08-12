@@ -2,7 +2,7 @@
 title: Tiempos de crisis, resistencias e infrapolítica en la migración inmóvil venezolana
 authors: D'Hers, M.
 year: 2023
-tipo: Trabajos académicos
+tipo: Artículos
 venue: Horizontes Antropológicos, ano 29, n. 65
 url: https://doi.org/10.1590/1806-9983e650407
 doi: ''
