@@ -1,6 +1,6 @@
 ---
 title: Home
-eyebrow: Antropología · Cuidado · Venezuela ◆ 2026
+eyebrow: Antropología · Venezuela ◆ 2026
 role: Doctor en Antropología
 ---
 
