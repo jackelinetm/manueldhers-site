@@ -28,7 +28,7 @@ perfiles:
     display: '@manuchente'
 topics:
   - Migración inmóvil
-  - Reorganización del cuidado
+  - Reorganización social del cuidado
   - Diáspora venezolana
   - Cartografías postnacionales
 ---
