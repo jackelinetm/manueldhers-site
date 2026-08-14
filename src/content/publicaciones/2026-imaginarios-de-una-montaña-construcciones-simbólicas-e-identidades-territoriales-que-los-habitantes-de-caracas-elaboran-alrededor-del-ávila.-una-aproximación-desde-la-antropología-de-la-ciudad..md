@@ -7,6 +7,8 @@ venue: Trabajo Final de Grado. UCV
 url: ''
 doi: ''
 citation: 'D''Hers, M. (2016) "Imaginarios de una montaña: Construcciones simbólicas e identidades territoriales que los habitantes de Caracas elaboran alrededor del Ávila. Una aproximación desde la antropología de la ciudad" T.F.G. Escuela de Antropología, Universidad Central de Venezuela.'
-downloads: []
+downloads:
+  - label: PDF Completo
+    url: https://manueldhers.com/uploads/TFG-UCV.pdf
 order: null
 ---
